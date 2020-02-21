@@ -3,6 +3,14 @@ layout: default
 ---
 <ul>
 	{% for post in site.posts %}
-	<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="/assets/img/file.ico" title="{{ post.title }}" />{{ post.title }}</a></li>
+		{% assign img_src = "/assets/img/file.ico" %}
+		{% if post.filetype == "image" %}
+			{% assign img_src = "/assets/img/image.ico" %}
+		{% elsif post.filetype == "image2" %}
+			{% assign img_src = "/assets/img/image2.ico" %}
+		{% elsif post.filetype == "creation" %}
+			{% assign img_src = "/assets/img/creation.ico" %}
+		{% endif %}
+		<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="{{ img_src }}" title="{{ post.title }}" />{{ post.title }}</a></li>
 	{% endfor %}
 </ul>

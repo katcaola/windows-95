@@ -46,7 +46,17 @@
 				{% if page.title == 'me' or page.title == '404...' %}
 					<ul>
 						{% for post in site.posts %}
-						<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="/assets/img/file.ico" title="{{ post.title }}" />{{ post.title }}</a></li>
+							{% assign img_src = "/assets/img/file.ico" %}
+							{% if post.filetype == "file" %}
+								{% assign img_src = "/assets/img/file.ico" %}
+							{% elsif post.filetype == "image" %}
+								{% assign img_src = "/assets/img/image.ico" %}
+							{% elsif post.filetype == "image2" %}
+								{% assign img_src = "/assets/img/image2.ico" %}
+							{% elsif post.filetype == "creation" %}
+								{% assign img_src = "/assets/img/creation.ico" %}
+							{% endif %}
+							<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="{{ img_src }}" title="{{ post.title }}" />{{ post.title }}</a></li>
 						{% endfor %}
 					</ul>
 				{% else %}
@@ -55,7 +65,15 @@
 			{% else %}
 				<ul>
 					{% for post in site.posts %}
-					<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="/assets/img/file.ico" title="{{ post.title }}" />{{ post.title }}</a></li>
+						{% assign img_src = "/assets/img/file.ico" %}
+						{% if post.filetype == "image" %}
+							{% assign img_src = "/assets/img/image.ico" %}
+						{% elsif post.filetype == "image2" %}
+							{% assign img_src = "/assets/img/image2.ico" %}
+						{% elsif post.filetype == "creation" %}
+							{% assign img_src = "/assets/img/creation.ico" %}
+						{% endif %}
+						<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="{{ img_src }}" title="{{ post.title }}" />{{ post.title }}</a></li>
 					{% endfor %}
 				</ul>
 			{% endunless %}
@@ -70,9 +88,17 @@
 		</div>
 	</div>
 	{% if page.title %}
-        <div class="content">
-			<div class="post_title">
-				<img src="/assets/img/file.png" />
+	<div class="content">
+		<div class="post_title">
+			{% assign img_src = "/assets/img/file.png" %}
+			{% if page.filetype == "image" %}
+				{% assign img_src = "/assets/img/image.png" %}
+			{% elsif page.filetype == "image2" %}
+				{% assign img_src = "/assets/img/image2.png" %}
+			{% elsif page.filetype == "creation" %}
+				{% assign img_src = "/assets/img/creation.png" %}
+			{% endif %}
+			<img src="{{ img_src }}" />
 				<h1>{{  page.title  }}</h1>
 				<a href="/"><div class="btn"><span class="fa fa-times"></span></div></a>
 				<div class="btn btn_max"><span class="fa fa-window-maximize"></span></div>
@@ -92,7 +118,7 @@
 	<script src="/assets/js/001.js"></script>
 	<script src="/assets/js/002.js"></script>
 	<div class="footer">
-		<p>Created by <a href="http://github.com/h01000110" target="_blank">h01000110 (hi)</a> | Code licensed under <a href="https://github.com/h01000110/h01000110.github.io/blob/master/LICENSE" target="_blank">MIT License</a></p>
+		<p>Created by <a href="http://github.com/h01000110" target="_blank">h01000110 (hi)</a> | Code licensed under <a href="https://github.com/h01000110/h01000110.github.io/blob/master/LICENSE" target="_blank">MIT License</a> | Test: gjqpy</p>
 	</div>
 </body>
 </html>
