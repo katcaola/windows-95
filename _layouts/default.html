@@ -32,39 +32,34 @@
 		<div class="tag_list">
 			<ul id="tag-list">
 				<li><a href="/" ><img src="/assets/img/disk.png" />(C:)</a>
-			<ul>
-				{% assign tags = site.tags | sort %}
-				{% for tag in tags %}
-				<li><a href="/tag/{{ tag | first | slugify }}/" title="{{ tag[0] | replace:'-', ' ' }}"><img src="/assets/img/folder.ico" />{{ tag[0] | replace:'-', ' ' }}</a></li>
-				{% endfor %}
-			</ul>
+					<ul>
+						{% assign tags = site.tags | sort %}
+						{% for tag in tags %}
+						<li><a href="/tag/{{ tag | first | slugify }}/" title="{{ tag[0] | replace:'-', ' ' }}"><img src="/assets/img/folder.ico" />{{ tag[0] | replace:'-', ' ' }}</a></li>
+						{% endfor %}
+					</ul>
 				</li>
 			</ul>
 		</div>
 		<div class="post_list">
 			{% unless page.date%}
 				{% if page.title == 'me' or page.title == '404...' %}
-					<ul>
-						{% for post in site.posts %}
-							{% assign img_src = "/assets/img/file.ico" %}
-							{% if post.filetype == "file" %}
-								{% assign img_src = "/assets/img/file.ico" %}
-							{% elsif post.filetype == "image" %}
-								{% assign img_src = "/assets/img/image.ico" %}
-							{% elsif post.filetype == "image2" %}
-								{% assign img_src = "/assets/img/image2.ico" %}
-							{% elsif post.filetype == "creation" %}
-								{% assign img_src = "/assets/img/creation.ico" %}
-							{% endif %}
-							<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="{{ img_src }}" title="{{ post.title }}" />{{ post.title }}</a></li>
-						{% endfor %}
-					</ul>
+					{% include post-list-all-ico.html %}
 				{% else %}
 					{{ content }}
 				{% endif %}
 			{% else %}
 				<ul>
 					{% for post in site.posts %}
+		{% comment %}
+		{ for post in site.tags[page.tag] }
+		{% endcomment %}
+
+						{% comment %} 
+							DEFAULT ASSIGN FILE ICON IF NONE ASSIGNED.
+							IF STATEMENT FOR EACH TYPE OTHER THAN DEFAULT "FILE.ICO" 
+						{% endcomment %}
+
 						{% assign img_src = "/assets/img/file.ico" %}
 						{% if post.filetype == "image" %}
 							{% assign img_src = "/assets/img/image.ico" %}
@@ -73,7 +68,7 @@
 						{% elsif post.filetype == "creation" %}
 							{% assign img_src = "/assets/img/creation.ico" %}
 						{% endif %}
-						<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="{{ img_src }}" title="{{ post.title }}" />{{ post.title }}</a></li>
+						<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="{{ img_src }}" title="{{ post.title }}" />❀{{ post.title }}</a></li>
 					{% endfor %}
 				</ul>
 			{% endunless %}
@@ -90,31 +85,23 @@
 	{% if page.title %}
 	<div class="content">
 		<div class="post_title">
-			{% assign img_src = "/assets/img/file.png" %}
-			{% if page.filetype == "image" %}
-				{% assign img_src = "/assets/img/image.png" %}
-			{% elsif page.filetype == "image2" %}
-				{% assign img_src = "/assets/img/image2.png" %}
-			{% elsif page.filetype == "creation" %}
-				{% assign img_src = "/assets/img/creation.png" %}
-			{% endif %}
-			<img src="{{ img_src }}" />
-				<h1>{{  page.title  }}</h1>
-				<a href="/"><div class="btn"><span class="fa fa-times"></span></div></a>
-				<div class="btn btn_max"><span class="fa fa-window-maximize"></span></div>
-				<div class="btn"><span class="fa fa-window-minimize"></span></div>
-			</div>
-			<ul class="topbar">
-				<li>{{ page.date | date: '%B %-d, %Y' }}</li>
-			</ul>
-			<div class="post_content">
-        		{{ content }}
-				{% if page.title %}
-					{% include donate.html %}
-				{% endif %}
-			</div>
+			{% include post-specific-png.html %}
+			<h1>{{  page.title  }}</h1>
+			<a href="/"><div class="btn"><span class="fa fa-times"></span></div></a>
+			<div class="btn btn_max"><span class="fa fa-window-maximize"></span></div>
+			<div class="btn"><span class="fa fa-window-minimize"></span></div>
 		</div>
-    {% endif %}
+		<ul class="topbar">
+			<li>{{ page.date | date: '%B %-d, %Y' }}</li>
+		</ul>
+		<div class="post_content">
+				{{ content }}
+			{% if page.title %}
+				{% include donate.html %}
+			{% endif %}
+		</div>
+	</div>
+	{% endif %}
 	<script src="/assets/js/001.js"></script>
 	<script src="/assets/js/002.js"></script>
 	<div class="footer">

@@ -3,6 +3,12 @@ layout: default
 ---
 <ul>
 	{% for post in site.tags[page.tag] %}
+		{% capture tag_url %}{{ "/tag/" | append: page.tag | append: post.url }}{% endcapture %}
+		{% comment %} 
+			DEFAULT ASSIGN FILE ICON IF NONE ASSIGNED.
+			IF STATEMENT FOR EACH TYPE OTHER THAN DEFAULT "FILE.ICO" 
+		{% endcomment %}
+		
 		{% assign img_src = "/assets/img/file.ico" %}
 		{% if post.filetype == "image" %}
 			{% assign img_src = "/assets/img/image.ico" %}
@@ -11,6 +17,6 @@ layout: default
 		{% elsif post.filetype == "creation" %}
 			{% assign img_src = "/assets/img/creation.ico" %}
 		{% endif %}
-		<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="{{ img_src }}" title="{{ post.title }}" />{{ post.title }}</a></li>
+		<li><a href="{{ post.url }}" title="{{ post.title }}"><img src="{{ img_src }}" title="{{ post.title }}" />☆{{ post.title }}</a></li>
 	{% endfor %}
 </ul>

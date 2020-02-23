@@ -11,6 +11,6 @@ layout: default
 		{% elsif post.filetype == "creation" %}
 			{% assign img_src = "/assets/img/creation.ico" %}
 		{% endif %}
-		<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="{{ img_src }}" title="{{ post.title }}" />{{ post.title }}</a></li>
+		<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="{{ img_src }}" title="{{ post.title }}" />✿{{ post.title }}</a></li>
 	{% endfor %}
 </ul>
