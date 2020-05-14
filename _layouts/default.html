@@ -44,30 +44,20 @@
 		<div class="post_list">
 			{% unless page.date%}
 				{% if page.title == 'me' or page.title == '404...' %}
-					{% include post-list-all-ico.html %}
+					{% include show-all-posts.html %}
 				{% else %}
 					{{ content }}
 				{% endif %}
 			{% else %}
 				<ul>
-					{% for post in site.posts %}
-		{% comment %}
-		{ for post in site.tags[page.tag] }
-		{% endcomment %}
-
-						{% comment %} 
-							DEFAULT ASSIGN FILE ICON IF NONE ASSIGNED.
-							IF STATEMENT FOR EACH TYPE OTHER THAN DEFAULT "FILE.ICO" 
-						{% endcomment %}
-
-						{% assign img_src = "/assets/img/file.ico" %}
-						{% if post.filetype == "image" %}
-							{% assign img_src = "/assets/img/image.ico" %}
-						{% elsif post.filetype == "image2" %}
-							{% assign img_src = "/assets/img/image2.ico" %}
-						{% elsif post.filetype == "creation" %}
-							{% assign img_src = "/assets/img/creation.ico" %}
-						{% endif %}
+					{% comment %}
+						TO ONLY SHOW TAGS WHEN A PAGE IS SELECTED:
+							{ for post in site.tags[page.tag] }
+						TO SHOW ALL WHEN A PAGE IS SELECTED:	
+							{ for post in site.posts }
+					{% endcomment %}
+					{% for post in site.tags[page.tag] %}
+						{% include post-type-ico-file.html %}
 						<li><a href="{{  post.url }}" title="{{ post.title }}"><img src="{{ img_src }}" title="{{ post.title }}" />❀{{ post.title }}</a></li>
 					{% endfor %}
 				</ul>
@@ -85,7 +75,7 @@
 	{% if page.title %}
 	<div class="content">
 		<div class="post_title">
-			{% include post-specific-png.html %}
+			{% include post-type-png-file.html %}
 			<h1>{{  page.title  }}</h1>
 			<a href="/"><div class="btn"><span class="fa fa-times"></span></div></a>
 			<div class="btn btn_max"><span class="fa fa-window-maximize"></span></div>
@@ -105,7 +95,7 @@
 	<script src="/assets/js/001.js"></script>
 	<script src="/assets/js/002.js"></script>
 	<div class="footer">
-		<p>Created by <a href="http://github.com/h01000110" target="_blank">h01000110 (hi)</a> | Code licensed under <a href="https://github.com/h01000110/h01000110.github.io/blob/master/LICENSE" target="_blank">MIT License</a> | Test: gjqpy</p>
+		<p>Theme originally created by <a href="http://github.com/h01000110" target="_blank">h01000110 (hi)</a> | Code licensed under <a href="https://github.com/h01000110/h01000110.github.io/blob/master/LICENSE" target="_blank">MIT License</a></p>
 	</div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Markdown Test Page"
-tags: tag2
+tag: tag2
 filetype: file
 ---
 
